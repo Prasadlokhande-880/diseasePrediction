@@ -1,0 +1,11 @@
+/* App.css */
+
+.card-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevents wrapping to the next line */
+    gap: 1rem; /* Optional: adds space between cards */
+  }
+
+  .card-container > * {
+    flex: 1 1 auto;
+  }
