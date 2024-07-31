@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -6,23 +6,47 @@ import "./App.css";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
-import LodingPage from "./pages/LodingPage";
+import LoadingPage from "./pages/LodingPage";
 
 const App: React.FC = () => {
+  useEffect(() => {
+    const cursal = document.querySelector(".cursal");
+
+    const handleMouseMove = (e: MouseEvent) => {
+      cursal?.setAttribute("style", `top: ${e.pageY - 15}px; left: ${e.pageX - 15}px;`);
+    };
+
+    const handleClick = () => {
+      cursal?.classList.add("repelAnimation");
+
+      setTimeout(() => {
+        cursal?.classList.remove("repelAnimation");
+      }, 500);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("click", handleClick);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   return (
     <>
-    <Router>
-      <Suspense fallback={<div><LodingPage></LodingPage></div>}>
-        <Routes>
-
-          <Route path="/" element={<Home />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Contact" element={<Contact />} />
-        </Routes>
-      </Suspense>
-    </Router>
+      <div className="cursal"></div>
+      <Router>
+        <Suspense fallback={<div><LoadingPage /></div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Suspense>
+      </Router>
     </>
   );
-}
+};
 
 export default App;

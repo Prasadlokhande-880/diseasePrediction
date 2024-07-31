@@ -1,7 +1,11 @@
 import React from 'react';
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { useLocation, Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <header>
       <nav className="bg-black border-gray-800 px-6 lg:px-6 py-2.5 mt-[5px]">
@@ -21,12 +25,12 @@ const Navbar = () => {
               <UserButton />
             </SignedIn>
             <SignedOut>
-            <a
-              href="#"
-              className="text-white bg-gray-700 hover:bg-gray-600 focus:ring-4 focus:ring-gray-500 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-            >
-              <SignInButton />
-            </a>
+              <a
+                href="#"
+                className="text-white bg-gray-700 hover:bg-gray-600 focus:ring-4 focus:ring-gray-500 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+              >
+                <SignInButton />
+              </a>
             </SignedOut>
             <button
               data-collapse-toggle="mobile-menu-2"
@@ -68,29 +72,37 @@ const Navbar = () => {
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <a
-                  href="/"
-                  className="block py-2 pr-4 pl-3 text-white rounded lg:bg-transparent lg:text-white lg:p-0"
-                  aria-current="page"
+                <Link
+                  to="/"
+                  className={`block py-2 pr-4 pl-3 ${currentPath === '/' ? 'active-link' : 'text-gray-400'}  lg:bg-transparent lg:p-0`}
+                  aria-current={currentPath === '/' ? 'page' : undefined}
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/About"
-                  className="block py-2 pr-4 pl-3 text-gray-400 border-b border-gray-800 hover:bg-gray-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-white lg:p-0"
+                <Link
+                  to="/About"
+                  className={`block py-2 pr-4 pl-3 ${currentPath === '/About' ? 'active-link' : 'text-gray-400'} border-b border-gray-800 hover:bg-gray-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-white lg:p-0`}
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/Contact"
-                  className="block py-2 pr-4 pl-3 text-gray-400 border-b border-gray-800 hover:bg-gray-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-white lg:p-0"
+                <Link
+                  to="/Contact"
+                  className={`block py-2 pr-4 pl-3 ${currentPath === '/Contact' ? 'active-link' : 'text-gray-400'} border-b border-gray-800 hover:bg-gray-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-white lg:p-0`}
                 >
                   Contact
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/diseaseprediction"
+                  className={`block py-2 pr-4 pl-3 ${currentPath === '/diseaseprediction' ? 'active-link' : 'text-gray-400'} border-b border-gray-800 hover:bg-gray-700 lg:hover:bg-transparent lg:border-0 lg:hover:text-white lg:p-0`}
+                >
+                  Disease Prediction
+                </Link>
               </li>
             </ul>
           </div>
