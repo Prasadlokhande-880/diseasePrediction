@@ -6,6 +6,7 @@ import "./App.css";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Diseaseprediction = lazy(() => import("./pages/Diseaseprediction"));
 import LoadingPage from "./pages/LodingPage";
 
 const App: React.FC = () => {
@@ -42,6 +43,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/diseaseprediction" element={<Diseaseprediction />} />
           </Routes>
         </Suspense>
       </Router>
