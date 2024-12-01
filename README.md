@@ -1,4 +1,3 @@
-Here's a sample README for your **Owner Avatar Disease Prediction** project, which includes the setup steps and description of the project components:
 
 ---
 
